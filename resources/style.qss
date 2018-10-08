@@ -1,0 +1,33 @@
+QWindow {
+    visible: true
+    width: 640
+    height: 480
+    title: qsTr("Hello World")
+}
+
+QPushButton {
+    color: #000040;
+    border: 2px solid #aaaaaa;
+    border-radius: 6px;
+    background-color: #e8e8e8;
+    width: 60px;
+    height: 40px;
+}
+
+QPushButton:hover#key_EQ,
+QPushButton:hover#key_Comma,
+QPushButton:hover#key_C
+{
+    border: 3px solid #888888;
+    background-color: #ff0000;
+}
+
+
+QPushButton#key_EQ,
+QPushButton#key_Comma,
+QPushButton#key_0
+{
+        font: 16pt "MS Shell Dlg 2";
+        font-weight: bold;
+}
+
