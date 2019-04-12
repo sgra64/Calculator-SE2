@@ -131,10 +131,7 @@ void InputProcessor::notify_CalcMode( XEvent& e ) {
         break;
 
     case GuiFacade::Comma:
-        if( hasDot ) {
-            break;
-        }
-        // case fall-through
+
     case GuiFacade::K0:
     case GuiFacade::K1:
     case GuiFacade::K2:
@@ -145,6 +142,7 @@ void InputProcessor::notify_CalcMode( XEvent& e ) {
     case GuiFacade::K7:
     case GuiFacade::K8:
     case GuiFacade::K9: {
+        if( ! ( e.ev == GuiFacade::Comma && hasDot ) ) {
             static const char digits [] = {'0','1','2','3','4','5','6','7','8','9','.'};
             char dig = digits[ e.ev - GuiFacade::K0 ];
 
@@ -161,7 +159,7 @@ void InputProcessor::notify_CalcMode( XEvent& e ) {
                 bufNumber[0] = dig;
             }
             inpmode_ = INPUT_MODE::numbers;
-
+        }
         } break;
 
     case GuiFacade::BS: {
@@ -174,7 +172,10 @@ void InputProcessor::notify_CalcMode( XEvent& e ) {
 
     case GuiFacade::C:
             alu.clearAll();
-            // case fall-through
+            alu.clearTop();
+            bufNumber = "0";
+            break;
+
     case GuiFacade::CE: {
             alu.clearTop();
             bufNumber = "0";
